@@ -10,8 +10,8 @@ To run this project, you'll need to set up Python and install all required depen
 
 1. **Clone the repository**:
    ```
-   git clone [https://github.com/Andy7ua/yolov8_onnx_img_processing.git]
-   cd [yolov8_onnx_img_processing]
+   git clone https://github.com/Andy7ua/yolov8_onnx_img_processing.git
+   cd yolov8_onnx_img_processing
    ```
 
 2. **Install dependencies**:
