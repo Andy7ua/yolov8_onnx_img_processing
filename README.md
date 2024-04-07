@@ -33,7 +33,7 @@ To perform object detection, navigate to the directory containing `main.py`, and
 python main.py --model yolov8n.onnx --img image.jpg
 ```
 
-Replace `image.jpg` with the name of your image file. By default, the output image will be saved in the current directory. You can change the output location by modifying line 199 in `main.py`.
+Replace `image.jpg` with the name of your image file. By default, the output image will be saved in the current directory. You can change the output location by modifying line 119 in `main.py`.
 
 ## Image Processing
 
