@@ -23,7 +23,7 @@ def main(model, video_path, filters=False, save=False):
         fourcc = cv2.VideoWriter_fourcc(*'MP4V')
         out_fps = 30  # Adjust this to match the FPS of the input video
         out_size = (int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
-        out = cv2.VideoWriter('output_2.mp4', fourcc, out_fps, out_size)
+        out = cv2.VideoWriter('predictions/output_video.mp4', fourcc, out_fps, out_size)
 
     # Read frames from the video
     while True:
@@ -52,7 +52,7 @@ def main(model, video_path, filters=False, save=False):
 if __name__ == "__main__":
     # Path variables
     model_path = "yolov8n.onnx"
-    video_path = "/Users/andy/Downloads/IMG_0342_test.mov"
+    video_path = "video_1.mov"
     save_video, filters = True, True
 
     # Load the ONNX model
