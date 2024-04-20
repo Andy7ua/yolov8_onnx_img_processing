@@ -31,7 +31,7 @@ def draw_bounding_box(img, class_id, confidence, x, y, x_plus_w, y_plus_h):
     cv2.putText(img, label, (x - 10, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 
 
-def main(onnx_model, input_image):
+def frame_proc(model, input_image):
     """
     Main function to load ONNX model, perform inference, draw bounding boxes, and display the output image.
 
@@ -42,17 +42,11 @@ def main(onnx_model, input_image):
     Returns:
         list: List of dictionaries containing detection information such as class_id, class_name, confidence, etc.
     """
-    # Load the ONNX model
-    model: cv2.dnn.Net = cv2.dnn.readNetFromONNX(onnx_model)
-
-    # Read the input image
-    original_image: np.ndarray = cv2.imread(input_image)
+    original_image = input_image
     [height, width, _] = original_image.shape
-
-    # Prepare a square image for inference
-    length = max((height, width))
+    length = max(height, width)
     image = np.zeros((length, length, 3), np.uint8)
-    image[0:height, 0:width] = original_image
+    image[:height, :width, :] = original_image
 
     # Calculate scale factor
     scale = length / 640
@@ -114,18 +108,20 @@ def main(onnx_model, input_image):
             round((box[1] + box[3]) * scale),
         )
 
-    # Display the image with bounding boxes
-    cv2.imshow("image", original_image)
-    cv2.imwrite("result.png", original_image)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
-    return detections
+    return detections, original_image
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--model", default="yolov8n.onnx", help="Input your ONNX model.")
-    parser.add_argument("--img", default=str(ASSETS / "bus.jpg"), help="Path to input image.")
-    args = parser.parse_args()
-    main(args.model, args.img)
+    # Path variables
+    model_path = "yolov8n.onnx"
+    image_path = "img_1.jpeg"
+
+    # Load the ONNX model
+    model = cv2.dnn.readNetFromONNX(model_path)
+    detections, original_image = frame_proc(model, cv2.imread(image_path))
+
+    # Display the image with bounding boxes
+    cv2.imshow("image", original_image)
+    # cv2.imwrite("result.png", original_image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()

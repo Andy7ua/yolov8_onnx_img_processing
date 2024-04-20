@@ -56,18 +56,18 @@ def apply_linear_wave(image):
     return img_output
 
 
-def process_image(image_path, save_path):
-    image = cv2.imread(image_path)
+def process_image(image, save_path="result", comb_num=3):
     functions = [add_noise, apply_high_pass_filter, apply_low_pass_filter, apply_distortion, apply_twisting, apply_linear_wave]
-    selected_functions = random.sample(functions, 3)  # Randomly select 3 different functions
+    selected_functions = random.sample(functions, comb_num)  # Randomly select 3 different functions
     for func in selected_functions:
         image = func(image)
-    cv2.imwrite(save_path, image)
+    # cv2.imwrite(save_path, image)
+    return image
 
 
 if __name__ == '__main__':
     img_1, img_2, img_3 = "img_1.jpeg", "img_2.JPG", "img_3.jpeg"
     os.makedirs("results", exist_ok=True)
-    process_image(img_1, "results/processed_img_4.jpeg")
-    process_image(img_2, "results/processed_img_5.JPG")
-    process_image(img_3, "results/processed_img_6.jpeg")
+    process_image(cv2.imread(img_1), "results/processed_img_4.jpeg")
+    process_image(cv2.imread(img_2), "results/processed_img_5.JPG")
+    process_image(cv2.imread(img_3), "results/processed_img_6.jpeg")
