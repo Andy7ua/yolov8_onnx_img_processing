@@ -47,6 +47,18 @@ python img_processing.py
 
 This will apply predefined filters to the images and save the results.
 
+## Video Processing
+
+To apply filters and further process the video, you can use the `video_proc.py` script. Before running, ensure to adjust the paths for the input/output videos. Also, you can change saving and filtering or number of combination filters.
+
+To run the script, execute:
+
+```bash
+python video_proc.py
+```
+
+This will apply predefined filters to the video and save the result.
+
 ## Further Customization
 
 You can customize the processing behaviors by modifying the scripts according to your project needs. This might include changing the filters used, adjusting image paths, or modifying export parameters for the ONNX model.
